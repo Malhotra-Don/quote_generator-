@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quoteburst - Sign Up</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: url("pass.jpg") no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: rgb(14, 149, 173);
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 120px; /* corrected width property */
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+    }
+</style>
+  <link rel="stylesheet" href="quote1.css">
+</head>
+<body>
+ 
+  <form id="signupForm" onsubmit="return validateForm()">
+    <h3>Sign Up for Quoteburst </h3>
+    <input type="text" id="fullname" placeholder="Full Name" required>
+    <div id="fullnameError" class="error"></div>
+
+    <input type="text" id="email" placeholder="Email Address" required>
+    <div id="emailError" class="error"></div>
+
+    <input type="password" id="password" placeholder="Password" maxlength="8" minlength="8">
+    <div id="passwordError" class="error"></div>
+
+    <button type="submit">Sign Up</button><br><br>
+
+    <span>Already have an account? <a href="login1.html">Log in here</a> </span>
+</form>
+
+<script>
+    function validateForm() {
+        var fullname = document.getElementById('fullname').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var fullnameError = document.getElementById('fullnameError');
+        var emailError = document.getElementById('emailError');
+        var passwordError = document.getElementById('passwordError');
+        var valid = true;
+
+        // Resetting previous errors
+        fullnameError.textContent = '';
+        emailError.textContent = '';
+        passwordError.textContent = '';
+
+        // Validation for Full Name
+        if (fullname.trim() === '') {
+            fullnameError.textContent = 'Full Name is required';
+            valid = false;
+        }
+
+        // Validation for Email
+        if (email.trim() === '') {
+            emailError.textContent = 'Email is required';
+            valid = false;
+        } else if (!isValidEmail(email)) {
+            emailError.textContent = 'Please enter a valid email address';
+            valid = false;
+        }
+
+        // Validation for Password
+        if (password.trim() === '') {
+            passwordError.textContent = 'Password is required';
+            valid = false;
+        } else if (password.length !== 8) {
+            passwordError.textContent = 'Password must be exactly 8 characters long';
+            valid = false;
+        }
+
+        if (valid) {
+            // Redirect to main quote website after successful sign-up
+            window.location.href = "mainpage.html";
+            return false; // Prevent form submission
+        }
+
+        return false; // Prevent form submission
+    }
+
+    // Function to validate email format
+    function isValidEmail(email) {
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+</script>
+</body>
+</html>
