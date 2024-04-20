@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quoteburst- Login</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url("loginback.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(222, 38, 38, 0.8); /* Black shadow */
+            max-width: 400px; /* Increased width */
+            width: 80%; /* Responsive width */
+        }
+
+        input {
+            width: 100%;
+            padding: 12px; /* Increased padding */
+            margin-bottom: 20px; /* Increased margin */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: rgb(32, 10, 3);
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Button width */
+            font-size: 16px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="loginForm" onsubmit="return validateForm()">
+        <h2>Login in Quoteburst</h2>
+        <input type="text" id="username" placeholder="Username or Email Address" required>
+        <div id="usernameError" class="error"></div>
+
+        <input type="password" id="password" placeholder="Password" maxlength="8" minlength="8">
+        <div id="passwordError" class="error"></div>
+
+        <button type="submit">Log in</button><br><br>
+
+        <a href="login.html" onclick="forgotPassword()">Forgot Password?</a>
+    </form>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var usernameError = document.getElementById('usernameError');
+            var passwordError = document.getElementById('passwordError');
+            var valid = true;
+
+            // Resetting previous errors
+            usernameError.textContent = '';
+            passwordError.textContent = '';
+
+            // Validation for Username/Email
+            if (username.trim() === '') {
+                usernameError.textContent = 'Username or Email is required';
+                valid = false;
+            }
+
+            // Validation for Password
+            if (password.trim() === '') {
+                passwordError.textContent = 'Password is required';
+                valid = false;
+            } else if (password.length !== 8) {
+                passwordError.textContent = 'Password must be exactly 8 characters long';
+                valid = false;
+            }
+
+            if (valid) {
+                // Redirect to main quote website after successful login
+                window.location.href = "mainpage.html";
+                return false; // Prevent form submission
+            }
+
+            return valid;
+        }
+
+        function forgotPassword() {
+            // Add your code to handle forgot password functionality here
+            alert('Forgot password link clicked!');
+        }
+    </script>
+
+</body>
+</html>
